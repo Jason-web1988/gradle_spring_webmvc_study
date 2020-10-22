@@ -1,9 +1,20 @@
 package gradle_spring_webmvc_study.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class RegisterRequest {
+	@NotBlank	
+	@Email
     private String email;
+	@NotEmpty
+	@Size(min=6)
     private String password;
+	@NotEmpty
     private String confirmPassword;
+	@NotEmpty
     private String name;
 
     public String getEmail() {
