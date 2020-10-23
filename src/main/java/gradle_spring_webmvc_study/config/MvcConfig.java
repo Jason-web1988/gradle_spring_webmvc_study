@@ -4,12 +4,14 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import gradle_spring_webmvc_study.interceptor.AuthCheckInterceptor;
 
 
 @Configuration
@@ -42,6 +44,17 @@ public class MvcConfig implements WebMvcConfigurer{
 		ms.setDefaultEncoding("UTF-8");
 		return ms;
 	}
+	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(authCheckInterceptor()).addPathPatterns("/edit/**");
+	}
+
+	@Bean
+	public AuthCheckInterceptor authCheckInterceptor() {
+		return new AuthCheckInterceptor();
+	}
+
 
 	/*
 	 * 객체를 글로벌 범위 Validator로 사용
@@ -49,8 +62,9 @@ public class MvcConfig implements WebMvcConfigurer{
 	 * @Valid 애노테이션을 사용해서 Validator를 적용
 	 */
 	/*
-	 * @Override public Validator getValidator() { return new
-	 * RegisterRequestValidator(); }
+	 * @Override public Validator getValidator() { 
+	 * return new RegisterRequestValidator(); 
+	 * }
 	 */
 	
 
