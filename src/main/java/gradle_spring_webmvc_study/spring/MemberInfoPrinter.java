@@ -13,7 +13,7 @@ public class MemberInfoPrinter {
 	public void printMemberInfo(String email) {
 		Member member = memberDao.selectByEmail(email);
 		if (member == null) {
-			System.out.println("������ ����\n");
+			System.out.println("데이터없음\n");
 			return;
 		}
 		printer.print(member);
