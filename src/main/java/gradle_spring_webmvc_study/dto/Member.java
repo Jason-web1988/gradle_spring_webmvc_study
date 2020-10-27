@@ -2,13 +2,22 @@ package gradle_spring_webmvc_study.dto;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
+
 import gradle_spring_webmvc_study.exception.WrongIdPasswordException;
 
+//@JsonIgnoreProperties({"password"})
 public class Member {
     private Long id;
     private String email;
+    @JsonIgnore
     private String password;
     private String name;
+//    @JsonFormat(pattern="yyyyMMddHHmmss")
+//    @JsonFormat(shape=Shape.STRING)
     private LocalDateTime registerDateTime;
 
     public Member(String email, String password, String name, LocalDateTime registerDateTime) {
